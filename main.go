@@ -6,8 +6,8 @@ import (
 	"net"
 	"os"
 	"strings"
+	"text/tabwriter"
 	"time"
-    "text/tabwriter"
 )
 
 type Player struct {
@@ -33,11 +33,11 @@ func main() {
 	args := flag.Args()
 	if len(args) > 0 {
 		host := args[0]
-		
-        if len(*port) > 5 {
-            fmt.Println("Invalid port number\nTerminating program\n")
-            os.Exit(0)
-        }
+
+		if len(*port) > 5 {
+			fmt.Println("Invalid port number\nTerminating program\n")
+			os.Exit(0)
+		}
 
 		var response string = GetServerResponse(host, *port)
 		var server Server = ParseResponse(response)
@@ -46,7 +46,7 @@ func main() {
 			os.Exit(0)
 		}
 
-        PrintPlayerList(server)
+		PrintPlayerList(server)
 
 	} else {
 
@@ -57,21 +57,21 @@ func main() {
 }
 
 func PrintPlayerList(server Server) {
-    w := new(tabwriter.Writer)
-    w.Init(os.Stdout, 0, 8, 0, '\t', 0)
-    fmt.Fprintln(w, "name\tping\tpoints")
-    for _, player := range server.players {
-        fmt.Fprintln(w, player.name + "\t" + player.ping + "\t" + player.points)
-    }
-    fmt.Fprintln(w)
-    w.Flush()
+	w := new(tabwriter.Writer)
+	w.Init(os.Stdout, 0, 8, 0, '\t', 0)
+	fmt.Fprintln(w, "name\tping\tpoints")
+	for _, player := range server.players {
+		fmt.Fprintln(w, player.name+"\t"+player.ping+"\t"+player.points)
+	}
+	fmt.Fprintln(w)
+	w.Flush()
 }
 
 func GetServerResponse(host string, port string) string {
-    fmt.Println("\nUrban Terror Server Checker")
-    fmt.Println("----------------------------")
-    fmt.Println("Server: " + host + " // Port: " + port)
-    fmt.Println("----------------------------\n\n")
+	fmt.Println("\nUrban Terror Server Checker")
+	fmt.Println("----------------------------")
+	fmt.Println("Server: " + host + " // Port: " + port)
+	fmt.Println("----------------------------\n\n")
 
 	conn, err := net.Dial("udp", host+":"+port)
 	conn.SetDeadline(time.Now().Add(10 * time.Second))
