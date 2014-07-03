@@ -21,6 +21,11 @@ func main() {
 			os.Exit(0)
 		}
 
+		fmt.Println("\nUrban Terror Server Checker")
+		fmt.Println("----------------------------")
+		fmt.Println("Server: " + host + " // Port: " + *port)
+		fmt.Println("----------------------------\n\n")
+
 		var response string = gout.GetServerResponse(host, *port)
 		var server gout.Server = gout.ParseResponse(response)
 		if len(server.Configuration) < 1 {

@@ -24,10 +24,7 @@ type Server struct {
 }
 
 func GetServerResponse(host string, port string) string {
-	fmt.Println("\nUrban Terror Server Checker")
-	fmt.Println("----------------------------")
-	fmt.Println("Server: " + host + " // Port: " + port)
-	fmt.Println("----------------------------\n\n")
+	
 
 	conn, err := net.Dial("udp", host+":"+port)
 	conn.SetDeadline(time.Now().Add(10 * time.Second))
