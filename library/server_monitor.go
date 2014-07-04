@@ -8,19 +8,19 @@ import (
 )
 
 type Player struct {
-	Name   string
-	Ping   string
-	Points string
+	Name   string `json:"name,omitempty"`
+	Ping   string `json:"ping,omitempty"`
+	Points string `json:"points,omitempty"`
 }
 
 type Config struct {
-	Key   string
-	Value string
+	Key   string `json:"key,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type Server struct {
-	Players       []Player
-	Configuration []Config
+	Players       []Player `json:"players,omitempty"`
+	Configuration []Config `json:"configs,omitempty"`
 }
 
 func GetServerResponse(host string, port string) string {
